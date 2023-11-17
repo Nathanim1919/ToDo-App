@@ -4,6 +4,7 @@ import Header from './App/header.jsx'
 import TodoDashBoard from './features/todo/todoDashBoard.jsx';
 import TodoDetail from './features/todo/todoDetail.jsx';
 import TaskList from './features/todo/taskList.jsx';
+import TodoForm from './features/todo/todoForm.jsx';
 
 function App() {
     const [isNightMode, setNightMode] = useState(false);
@@ -15,7 +16,8 @@ function App() {
       <Header isNightMode={isNightMode} setNightMode={setNightMode}/>
      {/* <TodoDashBoard/> */}
      {/* <TodoDetail/> */}
-     <TaskList/>
+     {/* <TaskList/> */}
+     <TodoForm/>
     </div>
   )
 }

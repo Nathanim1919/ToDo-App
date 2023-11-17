@@ -1,69 +1,121 @@
 import React from 'react'
 import styled from 'styled-components'
+import {
+    FaCheckCircle,
+    FaRegCircle
+} from "react-icons/fa";
+
+import {
+    FiEdit
+} from "react-icons/fi";
+import {
+    MdDelete,
+    MdKeyboardBackspace
+} from "react-icons/md";
 
 function TodaysTask() {
   return (
     <TaskList >
         <h1>Todays Task</h1>
         <div className='todaysTask'>
-            <div>
-                <div className='icon'>com</div>
+            <div className='task'>
                 <div>
-                    <p>Task Title</p>
-                    <span>Personal</span>
+                    <div>
+                        <FaRegCircle/>
+                    </div>
+                    <div className='title'>
+                        <p>Task Title</p>
+                        <span>Personal</span>
+                    </div>
                 </div>
 
                 <div className='manipulationIcons'>
-                    <div>del</div>
-                    <div>edit</div>
+                    <div>
+                        <MdDelete/>
+                    </div>
+                    <div>
+                        <FiEdit/>
+                    </div>
                 </div>
             </div>
-            <div>
-                <div className='icon'>com</div>
+            <div className='task'>
                 <div>
-                    <p>Task Title</p>
-                    <span>Personal</span>
+                    <div>
+                        <FaRegCircle/>
+                    </div>
+                    <div className='title'>
+                        <p>Task Title</p>
+                        <span>Personal</span>
+                    </div>
                 </div>
 
                 <div className='manipulationIcons'>
-                    <div>del</div>
-                    <div>edit</div>
+                    <div>
+                        <MdDelete/>
+                    </div>
+                    <div>
+                        <FiEdit/>
+                    </div>
                 </div>
             </div>
-            <div>
-                <div className='icon'>com</div>
+            <div className='task'>
                 <div>
-                    <p>Task Title</p>
-                    <span>Personal</span>
+                    <div>
+                        <FaRegCircle/>
+                    </div>
+                    <div className='title'>
+                        <p>Task Title</p>
+                        <span>Personal</span>
+                    </div>
                 </div>
 
                 <div className='manipulationIcons'>
-                    <div>del</div>
-                    <div>edit</div>
+                    <div>
+                        <MdDelete/>
+                    </div>
+                    <div>
+                        <FiEdit/>
+                    </div>
                 </div>
             </div>
-            <div>
-                <div className='icon'>com</div>
+            <div className='task'>
                 <div>
-                    <p>Task Title</p>
-                    <span>Personal</span>
+                    <div>
+                        <FaRegCircle/>
+                    </div>
+                    <div className='title'>
+                        <p>Task Title</p>
+                        <span>Personal</span>
+                    </div>
                 </div>
 
                 <div className='manipulationIcons'>
-                    <div>del</div>
-                    <div>edit</div>
+                    <div>
+                        <MdDelete/>
+                    </div>
+                    <div>
+                        <FiEdit/>
+                    </div>
                 </div>
             </div>
-            <div>
-                <div className='icon'>com</div>
+            <div className='task'>
                 <div>
-                    <p>Task Title</p>
-                    <span>Personal</span>
+                    <div>
+                        <FaRegCircle/>
+                    </div>
+                    <div className='title'>
+                        <p>Task Title</p>
+                        <span>Personal</span>
+                    </div>
                 </div>
 
                 <div className='manipulationIcons'>
-                    <div>del</div>
-                    <div>edit</div>
+                    <div>
+                        <MdDelete/>
+                    </div>
+                    <div>
+                        <FiEdit/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,46 +134,64 @@ const TaskList  = styled.div`
     }
 
     .todaysTask{
-        display: flex;
-        flex-direction: column;
+        display: grid;
         gap: .5rem;
+    }
 
-        >*{
-            margin: 0;
-            background-color: #fff;
-            display: grid;
-            grid-template-columns: 10% 80% 10%;
-            padding: 0.6rem;
-            place-items: center;
-            box-shadow:0 8px 23px rgba(0,0,0,.1);
-            border-radius:7px;
-            border:1px solid transparent;
-            transition:all .3s ease-in-out;
-            cursor:pointer;
-
-            >div:nth-child(2){
-                display:flex;
-                flex-direction:column;
-
-                span{
-                    opacity:.7;
-                }
-                >*{
-                    margin:0;
-                }
-            }
-            >div:nth-child(3){
-                display:flex;
-                align-items:center;
-                gap:1rem;
-            }
-
-            &:hover{
-                border:1px solid blue;
-                transform:scale(.95)
-            }
+    .task{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        padding: 0.5rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 12px rgba(0,0,0,.05);
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+        &:hover{
+            transform: scale(.96);
+            border-left: 7px solid blue;
         }
 
 
+        >div{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        >div:nth-child(1) .title{
+            display: flex;
+            flex-direction: column;
+
+            >*{
+                margin:0;
+            }
+
+            p{
+                font-size: 1rem;
+                font-weight: 300;
+            }
+
+            span{
+                font-size: .9rem;
+                font-weight: 800;
+            }
+        }
+
+        .manipulationIcons{
+            >*{
+                width:30px;
+                height:30px;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+
+                &:hover{
+                    background-color: #eee;
+                }
+            }
+        }
     }
 `

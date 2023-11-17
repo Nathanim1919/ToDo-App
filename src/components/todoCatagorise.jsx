@@ -53,6 +53,10 @@ const CatagoriesSection = styled.div`
                 margin: 0;
             }
 
+            span{
+                font-size: .9rem;
+            }
+
             .progresss{
                 width: 100%;
                 height: 5px;
