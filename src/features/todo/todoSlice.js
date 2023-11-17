@@ -8,7 +8,8 @@ import {
 const todoSlice = createSlice({
     name: "todos",
     initialState: {
-        todo: [],
+        categories: [],
+        todos: [],
         history: [],
         historyIndex: -1,
         sortPreference: 'dueDate', // Default sort preference
@@ -16,12 +17,26 @@ const todoSlice = createSlice({
     },
 
     reducers: {
+        addCategory: (state, action) => {
+            const {
+                title
+            } = action.payload;
+            const newCategory = {
+                id: uuidv4(),
+                title,
+                todos: [],
+            };
+            state.categories.push(newCategory);
+        },
+
         addTodo: (state, action) => {
             const {
                 title,
                 description,
                 dueDate,
                 priority,
+                catagorie,
+                categoryId
             } = action.payload;
 
             const newTodo = {
@@ -32,9 +47,16 @@ const todoSlice = createSlice({
                 priority,
                 status: 'Inprogress',
                 createdAt: Date.now(),
+                catagorie
             };
 
-            state.todo.push(newTodo);
+            // Find the category and add the todo to its todos array
+            const category = state.categories.find(cat => cat.id === categoryId);
+            if (category) {
+                category.todos.push(newTodo);
+            }
+
+            state.todos.push(newTodo);
             state.history = [...state.history.slice(0, state.historyIndex + 1), state.todo];
             state.historyIndex += 1;
         },
@@ -43,13 +65,13 @@ const todoSlice = createSlice({
             const {
                 todoId
             } = action.payload;
-            state.todo = state.todo.filter(todo => todo.id !== todoId);
+            state.todos = state.todo.filter(todo => todo.id !== todoId);
              state.history = [...state.history.slice(0, state.historyIndex + 1), state.todo];
              state.historyIndex += 1;
         },
 
         clearCompletedTodo: (state) => {
-            state.todo = state.todo.filter(todo => todo.status !== 'Completed');
+            state.todos = state.todos.filter(todo => todo.status !== 'Completed');
         },
 
 
@@ -59,7 +81,7 @@ const todoSlice = createSlice({
 
         sortTodos: (state) => {
             // Sort todos based on the current sort preference
-            state.todo.sort((a, b) => {
+            state.todos.sort((a, b) => {
                 if (state.sortPreference === 'dueDate') {
                     return a.dueDate - b.dueDate;
                 } else if (state.sortPreference === 'createdAt') {
@@ -77,7 +99,7 @@ const todoSlice = createSlice({
             const {
                 todoId
             } = action.payload;
-            const todoToComplete = state.todo.find((todo) => todo.id === todoId);
+            const todoToComplete = state.todos.find((todo) => todo.id === todoId);
             if (todoToComplete && todoToComplete.status !== 'Completed') {
                 todoToComplete.status = 'Completed';
                 state.completedCount += 1;
@@ -88,14 +110,14 @@ const todoSlice = createSlice({
         undo: (state) => {
             if (state.historyIndex > 0) {
                 state.historyIndex -= 1;
-                state.todo = state.history[state.historyIndex];
+                state.todos = state.history[state.historyIndex];
             }
         },
 
          redo: (state) => {
              if (state.historyIndex < state.history.length - 1) {
                  state.historyIndex += 1;
-                 state.todo = state.history[state.historyIndex];
+                 state.todos = state.history[state.historyIndex];
              }
          },
     },
@@ -106,6 +128,7 @@ export const {
     redo,
     addTodo,
     deleteTodo,
+    addCategory,
     clearCompletedTodo
 } = todoSlice.actions;
 export default todoSlice.reducer;

@@ -3,15 +3,23 @@ import styled from 'styled-components';
 import {
     MdClose
 } from "react-icons/md";
+import { addTodo } from './todoSlice';
+import {useSelector, useDispatch} from 'react-redux';
 
 
-const TodoForm = ({ addTodo }) => {
+const TodoForm = ({setOpenForm }) => {
+  
   const [newTodo, setNewTodo] = useState({
     title: '',
     description: '',
     dueDate: '',
     priority: 'Medium', // Set a default priority if needed
   });
+
+
+  const dispatch = useDispatch();
+  const todos = useSelector(state=> state.todos);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +31,7 @@ const TodoForm = ({ addTodo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodo(newTodo);
+    dispatch(addTodo(newTodo));
     // Reset the form
     setNewTodo({
       title: '',
@@ -31,12 +39,17 @@ const TodoForm = ({ addTodo }) => {
       dueDate: '',
       priority: 'Medium',
     });
+    setOpenForm(false);
+    console.log(todos)
   };
 
   return (
     <OverLay>
         <Form onSubmit={handleSubmit}>
-            <div className='close'>
+            <div className = 'close'
+            onClick = {
+                () => setOpenForm(false)
+            } >
                 <MdClose/>
             </div>
             <Label>
@@ -93,7 +106,7 @@ export default TodoForm;
         position: absolute;
         top: 1rem;
         right: 1rem;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         cursor: pointer;
         width: 30px;
         height: 30px;

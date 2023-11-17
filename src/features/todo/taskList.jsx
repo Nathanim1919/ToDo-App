@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import {
     FaCheckCircle,
-    FaRegCircle
+    FaRegCircle,
+    FaPlus
 } from "react-icons/fa";
 
 import {
@@ -12,17 +13,26 @@ import {
     MdDelete,
     MdKeyboardBackspace
 } from "react-icons/md";
+import TodoForm from './todoForm';
 
 function TaskList() {
+
+  const [openForm, setOpenForm] = useState(false);  
   return (
     <TaskLists >
+        {openForm && <TodoForm setOpenForm={setOpenForm}/>}
         <div className='header'>
             <div className='backIcon'>
                 <MdKeyboardBackspace/>
             </div>
 
-            <div>
-                <h2>Personal Tasks</h2>
+            <div className='catagorie'>
+                <div onClick = {
+                    () => setOpenForm(true)
+                } >
+                    <FaPlus/>
+                </div>
+                <h3>Personal Tasks</h3>
             </div>
         </div>
 
@@ -131,6 +141,23 @@ const TaskLists = styled.div`
 
             &:hover{
                 color:#eee;
+            }
+        }
+
+        .catagorie{
+            display: flex;
+            align-items: center;
+            gap:1rem;
+
+            >div{
+                width:25px;
+                height:25px;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+                background-color: blue;
+                color:#fff;
+                cursor: pointer;
             }
         }
     }
