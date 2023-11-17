@@ -1,17 +1,23 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Header from './App/header.jsx'
+import TodoDashBoard from './features/todo/todoDashBoard.jsx';
+import TodoDetail from './features/todo/todoDetail.jsx';
+import TaskList from './features/todo/taskList.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [isNightMode, setNightMode] = useState(false);
 
   return (
-    <>
-      <Header/>
-    </>
+    <div div className = {
+      isNightMode?"nightMode":""
+    } >
+      <Header isNightMode={isNightMode} setNightMode={setNightMode}/>
+     {/* <TodoDashBoard/> */}
+     {/* <TodoDetail/> */}
+     <TaskList/>
+    </div>
   )
 }
 
-export default App
+export default App;

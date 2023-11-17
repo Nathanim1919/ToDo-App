@@ -20,10 +20,8 @@ const todoSlice = createSlice({
             const {
                 title,
                 description,
-                createdAt,
                 dueDate,
                 priority,
-                status,
             } = action.payload;
 
             const newTodo = {
