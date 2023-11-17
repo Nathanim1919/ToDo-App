@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector} from 'react-redux';
 import { addCategory } from './todoSlice';
 import {
     MdClose
@@ -8,22 +8,25 @@ import {
 
 const CategoryForm = ({setCreateCatagorie}) => {
   const dispatch = useDispatch();
-  const [newCategoryTitle, setNewCategoryTitle] = useState('');
+  const [title, setTitle] = useState('');
+  const categorie = useSelector(state => state.categories);
+ 
 
   const handleTitleChange = (e) => {
-    setNewCategoryTitle(e.target.value);
+    setTitle(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (newCategoryTitle.trim() === '') {
+    if (title.trim() === '') {
       // You might want to handle empty category titles
       return;
     }
 
-    dispatch(addCategory({ title: newCategoryTitle }));
-    setNewCategoryTitle('');
+    dispatch(addCategory(title));
+    setTitle('');
+     console.log('Updated state:', categorie);
   };
 
   return (
@@ -40,7 +43,7 @@ const CategoryForm = ({setCreateCatagorie}) => {
             Category Title:
             <Input
             type="text"
-            value={newCategoryTitle}
+            value={title}
             onChange={handleTitleChange}
             />
         </InputLabel>

@@ -8,8 +8,83 @@ import {
 const todoSlice = createSlice({
     name: "todos",
     initialState: {
-        categories: [],
-        todos: [],
+       categories: [{
+               id: uuidv4(),
+               title: "Personal",
+               todos: [{
+                       id: uuidv4(),
+                       title: "Complete Project Proposal",
+                       description: "Research and compile information for the project proposal.",
+                       dueDate: "2023-12-01",
+                       priority: "High",
+                       catagorieId:"34682684628364287"
+                   },
+                   {
+                       id: uuidv4(),
+                       title: "Review Code Changes",
+                       description: "Go through the recent code changes and provide feedback.",
+                       dueDate: "2023-12-01",
+                       priority: "High",
+                       catagorieId:"34682684628364287"
+                   },
+               ],
+           },
+           {
+               id: uuidv4(),
+               title: "Work",
+               todos: [
+                {
+                       id: uuidv4(),
+                       title: "Prepare for Meeting",
+                       description: "Gather necessary documents and agenda items for the upcoming meeting.",
+                       dueDate: "2023-12-02",
+                       priority: "Medium",
+                      catagorieId:"837647863486262"
+                   },
+                   {
+                       id: uuidv4(),
+                       title: "Submit Project Report",
+                       description: "Finalize and submit the monthly project report.",
+                       dueDate: "2023-12-03",
+                       priority: "Medium",
+                      catagorieId:"837647863486262"
+                   },
+               ],
+           },
+       ],
+
+        todos: [
+            {
+                id: uuidv4(),
+                title: "Complete Project Proposal",
+                description: "Research and compile information for the project proposal.",
+                dueDate: "2023-12-01",
+                priority: "High",
+                catagorieId: "34682684628364287"
+            }, {
+                id: uuidv4(),
+                title: "Review Code Changes",
+                description: "Go through the recent code changes and provide feedback.",
+                dueDate: "2023-12-01",
+                priority: "High",
+                catagorieId: "34682684628364287"
+            },
+             {
+                 id: uuidv4(),
+                 title: "Prepare for Meeting",
+                 description: "Gather necessary documents and agenda items for the upcoming meeting.",
+                 dueDate: "2023-12-02",
+                 priority: "Medium",
+                 catagorieId: "837647863486262"
+             }, {
+                 id: uuidv4(),
+                 title: "Submit Project Report",
+                 description: "Finalize and submit the monthly project report.",
+                 dueDate: "2023-12-03",
+                 priority: "Medium",
+                 catagorieId: "837647863486262"
+             },
+        ],
         history: [],
         historyIndex: -1,
         sortPreference: 'dueDate', // Default sort preference
@@ -27,6 +102,7 @@ const todoSlice = createSlice({
                 todos: [],
             };
             state.categories.push(newCategory);
+            console.log(state.categories)
         },
 
         addTodo: (state, action) => {
@@ -35,7 +111,6 @@ const todoSlice = createSlice({
                 description,
                 dueDate,
                 priority,
-                catagorie,
                 categoryId
             } = action.payload;
 
@@ -47,7 +122,7 @@ const todoSlice = createSlice({
                 priority,
                 status: 'Inprogress',
                 createdAt: Date.now(),
-                catagorie
+                catagorieId: categoryId
             };
 
             // Find the category and add the todo to its todos array
@@ -57,7 +132,7 @@ const todoSlice = createSlice({
             }
 
             state.todos.push(newTodo);
-            state.history = [...state.history.slice(0, state.historyIndex + 1), state.todo];
+            state.history = [...state.history.slice(0, state.historyIndex + 1), state.todos];
             state.historyIndex += 1;
         },
 

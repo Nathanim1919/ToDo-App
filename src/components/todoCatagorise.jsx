@@ -1,30 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import {FaPlus} from "react-icons/fa";
 import CategoryForm from '../features/todo/catagorieForm';
+import {useSelector} from 'react-redux'
 
 function TodoCatagorise() {
-  const [createCatagorie, setCreateCatagorie] = useState(false);
+ const [createCatagorie, setCreateCatagorie] = useState(false);
+   const categories = useSelector((state) => state.categories);
+
+   useEffect(() => {
+       // This block will run whenever categories are updated
+       console.log('Updated categories:', categories);
+   }, [categories]); // Run the effect whenever categories changes
+
 
   return (
     <CatagoriesSection >
         <h1>Catagories</h1>
         {createCatagorie && <CategoryForm setCreateCatagorie={setCreateCatagorie}/>}
+
+
         <div className='catagories'>
+        {
+            categories && categories.map(cat => (
             <div>
                 <span>12 Tasks</span>
-                <h2>Personal</h2>
+                <h2>{cat.title}</h2>
                 <div className='progresss'>
                     <div className='inner-pro'></div>
                 </div>
             </div>
-            <div>
-                <span>12 Tasks</span>
-                <h2>Personal</h2>
-                <div className='progresss'>
-                    <div className='inner-pro'></div>
-                </div>
-            </div>
+        ))}
             <div className='create-catagorie' onClick={()=>setCreateCatagorie(true)}>
                 <FaPlus/>
             </div>

@@ -12,8 +12,10 @@ import {
     MdDelete,
     MdKeyboardBackspace
 } from "react-icons/md";
+import {useSelector} from 'react-redux'
 
 function TodaysTask() {
+  useSelector
   return (
     <TaskList >
         <h1>Todays Task</h1>
