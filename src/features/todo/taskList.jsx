@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import {
     FaCheckCircle,
@@ -16,6 +16,8 @@ import {
 import TodoForm from './todoForm';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Aos from 'aos';
+import 'aos/dist/aos.css'
 
 function TaskList() {
 
@@ -30,8 +32,14 @@ function TaskList() {
       return category;
   });
 
+useEffect(() => {
+    Aos.init({
+        duration: 1000
+    })
+}, [])
+
   return (
-    <TaskLists >
+    <TaskLists data-aos="fade-up">
         {openForm && <TodoForm setOpenForm={setOpenForm}/>}
         <div className = 'header' >
             <Link to={'/'} className='backIcon'>

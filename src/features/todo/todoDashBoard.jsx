@@ -1,12 +1,20 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import styled from 'styled-components'
 import TodoCatagorise from '../../components/todoCatagorise'
 import TodaysTask from '../../components/todaysTask';
+import Aos from 'aos';
+import 'aos/dist/aos.css'
 
 function TodoDashBoard() {
+  useEffect(() => {
+    Aos.init({
+      duration: 1000
+    })
+  }, [])
+
   return (
     <DashBoard >
-      <div className='header'>
+      <div className='header' data-aos="fade-up">
         <h1>Welcome Back!</h1>
         <p>The only way to do great work is to love what you do.</p>
       </div>

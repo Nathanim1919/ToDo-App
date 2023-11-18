@@ -4,6 +4,8 @@ import {FaPlus} from "react-icons/fa";
 import CategoryForm from '../features/todo/catagorieForm';
 import {useSelector} from 'react-redux'
 import { Link } from 'react-router-dom';
+import Aos from 'aos';
+import 'aos/dist/aos.css'
 
 function TodoCatagorise() {
  const [createCatagorie, setCreateCatagorie] = useState(false);
@@ -13,6 +15,12 @@ useEffect(() => {
     // This block will run whenever categories are updated
     console.log('Updated categories:', categories);
 }, [categories]); // Run the effect whenever categories changes
+
+  useEffect(() => {
+      Aos.init({
+          duration: 2000
+      })
+  }, [])
 
   return (
     <CatagoriesSection>
@@ -25,7 +33,7 @@ useEffect(() => {
             categories && categories.map(cat => (
           <Link to = {
               `catagorie/${cat.id}`
-          } >
+          } data-aos="zoom-in">
               <div>
                 <span>12 Tasks</span>
                 <h2>{(cat.title).slice(0, 10)}..</h2>
@@ -36,7 +44,7 @@ useEffect(() => {
           </Link> 
          
         ))}
-            <div className='create-catagorie' onClick={()=>setCreateCatagorie(true)}>
+            <div data-aos="zoom-out" className='create-catagorie' onClick={()=>setCreateCatagorie(true)}>
                 <FaPlus/>
             </div>
         </div>

@@ -15,111 +15,37 @@ import {
 import {useSelector} from 'react-redux'
 
 function TodaysTask() {
-  useSelector
+
+        const todos = useSelector(state=>state.todos.todos);
   return (
     <TaskList >
         <h1>Todays Task</h1>
         <div className='todaysTask'>
-            <div className='task'>
-                <div>
-                    <div>
-                        <FaRegCircle/>
-                    </div>
-                    <div className='title'>
-                        <p>Task Title</p>
-                        <span>Personal</span>
-                    </div>
-                </div>
+            {
+                todos.map(todo=>(
+                    <div className='task'>
+                        <div>
+                            <div>
+                                <FaRegCircle/>
+                            </div>
+                            <div className='title'>
+                                <p>{todo.title}</p>
+                                <span>Personal</span>
+                            </div>
+                        </div>
 
-                <div className='manipulationIcons'>
-                    <div>
-                        <MdDelete/>
+                        <div className='manipulationIcons'>
+                            <div>
+                                <MdDelete/>
+                            </div>
+                            <div>
+                                <FiEdit/>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <FiEdit/>
-                    </div>
-                </div>
-            </div>
-            <div className='task'>
-                <div>
-                    <div>
-                        <FaRegCircle/>
-                    </div>
-                    <div className='title'>
-                        <p>Task Title</p>
-                        <span>Personal</span>
-                    </div>
-                </div>
 
-                <div className='manipulationIcons'>
-                    <div>
-                        <MdDelete/>
-                    </div>
-                    <div>
-                        <FiEdit/>
-                    </div>
-                </div>
-            </div>
-            <div className='task'>
-                <div>
-                    <div>
-                        <FaRegCircle/>
-                    </div>
-                    <div className='title'>
-                        <p>Task Title</p>
-                        <span>Personal</span>
-                    </div>
-                </div>
-
-                <div className='manipulationIcons'>
-                    <div>
-                        <MdDelete/>
-                    </div>
-                    <div>
-                        <FiEdit/>
-                    </div>
-                </div>
-            </div>
-            <div className='task'>
-                <div>
-                    <div>
-                        <FaRegCircle/>
-                    </div>
-                    <div className='title'>
-                        <p>Task Title</p>
-                        <span>Personal</span>
-                    </div>
-                </div>
-
-                <div className='manipulationIcons'>
-                    <div>
-                        <MdDelete/>
-                    </div>
-                    <div>
-                        <FiEdit/>
-                    </div>
-                </div>
-            </div>
-            <div className='task'>
-                <div>
-                    <div>
-                        <FaRegCircle/>
-                    </div>
-                    <div className='title'>
-                        <p>Task Title</p>
-                        <span>Personal</span>
-                    </div>
-                </div>
-
-                <div className='manipulationIcons'>
-                    <div>
-                        <MdDelete/>
-                    </div>
-                    <div>
-                        <FiEdit/>
-                    </div>
-                </div>
-            </div>
+                ))
+            }
         </div>
     </TaskList>
   )
