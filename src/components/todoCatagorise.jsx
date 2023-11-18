@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {FaPlus} from "react-icons/fa";
 import CategoryForm from '../features/todo/catagorieForm';
 import {useSelector} from 'react-redux'
+import { Link } from 'react-router-dom';
 
 function TodoCatagorise() {
  const [createCatagorie, setCreateCatagorie] = useState(false);
@@ -22,13 +23,18 @@ useEffect(() => {
         <div className='catagories'>
         {
             categories && categories.map(cat => (
-            <div>
+          <Link to = {
+              `catagorie/${cat.id}`
+          } >
+              <div>
                 <span>12 Tasks</span>
-                <h2>{cat.title}</h2>
+                <h2>{(cat.title).slice(0, 10)}..</h2>
                 <div className='progresss'>
                     <div className='inner-pro'></div>
                 </div>
             </div>
+          </Link> 
+         
         ))}
             <div className='create-catagorie' onClick={()=>setCreateCatagorie(true)}>
                 <FaPlus/>
@@ -55,6 +61,8 @@ const CatagoriesSection = styled.div`
         gap: 1rem;
         align-items: center;
 
+
+
         .create-catagorie{
             font-size: 2rem;
             width: 3rem;
@@ -73,13 +81,25 @@ const CatagoriesSection = styled.div`
             }
         }
 
-        >*{
+        >a{
             background-color: #fff;
-            display: flex;
+            display: grid;
             flex-direction: column;
             padding:1rem 0.5rem;
             border-radius: 10px;
             box-shadow: 0 9px 25px rgba(0,0,0,.1);
+            transition: all .3s ease-in-out;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+
+            h2{
+                font-size: 1.2rem;
+            }
+
+            &:hover{
+                transform: scale(.9);
+            }
 
             >*{
                 margin: 0;

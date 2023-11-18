@@ -16,7 +16,7 @@ function App() {
       <Header isNightMode={isNightMode} setNightMode={setNightMode}/>
       <Routes>
         <Route path='/' element={<TodoDashBoard/>}/>
-        <Route path='catagorie/catagoriId' element={<TaskList/>}/>
+        <Route path='catagorie/:catagoriId' element={<TaskList/>}/>
         <Route path='catagorie/:catagoriId/task/:taskId' element={<TodoDetail/>}/>
       </Routes>
     </div>

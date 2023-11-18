@@ -14,17 +14,29 @@ import {
     MdKeyboardBackspace
 } from "react-icons/md";
 import TodoForm from './todoForm';
+import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function TaskList() {
 
   const [openForm, setOpenForm] = useState(false);  
+  const {
+      catagoriId
+  } = useParams()
+
+  const cat = useSelector(state => {
+      const category = state.todos.categories.find(cat => cat.id === catagoriId);
+      console.log(category)
+      return category;
+  });
+
   return (
     <TaskLists >
         {openForm && <TodoForm setOpenForm={setOpenForm}/>}
-        <div className='header'>
-            <div className='backIcon'>
+        <div className = 'header' >
+            <Link to={'/'} className='backIcon'>
                 <MdKeyboardBackspace/>
-            </div>
+            </Link>
 
             <div className='catagorie'>
                 <div onClick = {
@@ -32,10 +44,9 @@ function TaskList() {
                 } >
                     <FaPlus/>
                 </div>
-                <h3>Personal Tasks</h3>
+                <h3>{cat.title}</h3>
             </div>
-        </div>
-
+          </div>
         <div className='taskList'>
             <div>
                 <div>

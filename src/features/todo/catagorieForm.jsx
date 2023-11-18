@@ -24,9 +24,10 @@ const CategoryForm = ({setCreateCatagorie}) => {
       return;
     }
 
-    dispatch(addCategory(title));
+    dispatch(addCategory({title}));
     setTitle('');
      console.log('Updated state:', categorie);
+     setCreateCatagorie(false);
   };
 
   return (
