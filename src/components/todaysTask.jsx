@@ -13,7 +13,7 @@ import {
     MdKeyboardBackspace
 } from "react-icons/md";
 import {useSelector} from 'react-redux'
-import { markAsCompleted } from '../features/todo/todoSlice';
+import { markAsCompleted, deleteTodo } from '../features/todo/todoSlice';
 import { useDispatch } from 'react-redux';
 
 function TodaysTask() {
@@ -44,7 +44,11 @@ function TodaysTask() {
                             </div>
 
                             <div className='manipulationIcons'>
-                                <div>
+                                <div onClick = {
+                                    () => dispatch(deleteTodo({
+                                        todoId: todo.id,
+                                    }))
+                                } >
                                     <MdDelete/>
                                 </div>
                                 <div>

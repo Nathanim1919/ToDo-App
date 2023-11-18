@@ -11,79 +11,46 @@ const todoSlice = createSlice({
        categories: [{
                id: '34682684628364287',
                title: "Personal",
-               todos: [{
-                       id: uuidv4(),
-                       title: "Complete Project Proposal",
-                       description: "Research and compile information for the project proposal.",
-                       dueDate: "2023-12-01",
-                       priority: "High",
-                       catagorieId:"34682684628364287"
-                   },
-                   {
-                       id: uuidv4(),
-                       title: "Review Code Changes",
-                       description: "Go through the recent code changes and provide feedback.",
-                       dueDate: "2023-12-01",
-                       priority: "High",
-                       catagorieId:"34682684628364287"
-                   },
-               ],
+               todos: [],
            },
            {
                id: '837647863486262',
                title: "Work",
-               todos: [
-                {
-                       id: uuidv4(),
-                       title: "Prepare for Meeting",
-                       description: "Gather necessary documents and agenda items for the upcoming meeting.",
-                       dueDate: "2023-12-02",
-                       priority: "Medium",
-                       catagorieId:"837647863486262"
-                   },
-                   {
-                       id: uuidv4(),
-                       title: "Submit Project Report",
-                       description: "Finalize and submit the monthly project report.",
-                       dueDate: "2023-12-03",
-                       priority: "Medium",
-                       catagorieId:"837647863486262"
-                   },
-               ],
+               todos: [],
            },
        ],
 
         todos: [
-            {
-                id: uuidv4(),
-                title: "Complete Project Proposal",
-                description: "Research and compile information for the project proposal.",
-                dueDate: "2023-12-01",
-                priority: "High",
-                catagorieId: "34682684628364287"
-            }, {
-                id: uuidv4(),
-                title: "Review Code Changes",
-                description: "Go through the recent code changes and provide feedback.",
-                dueDate: "2023-12-01",
-                priority: "High",
-                catagorieId: "34682684628364287"
-            },
-             {
-                 id: uuidv4(),
-                 title: "Prepare for Meeting",
-                 description: "Gather necessary documents and agenda items for the upcoming meeting.",
-                 dueDate: "2023-12-02",
-                 priority: "Medium",
-                 catagorieId: "837647863486262"
-             }, {
-                 id: uuidv4(),
-                 title: "Submit Project Report",
-                 description: "Finalize and submit the monthly project report.",
-                 dueDate: "2023-12-03",
-                 priority: "Medium",
-                 catagorieId: "837647863486262"
-             },
+            // {
+            //     id: uuidv4(),
+            //     title: "Complete Project Proposal",
+            //     description: "Research and compile information for the project proposal.",
+            //     dueDate: "2023-12-01",
+            //     priority: "High",
+            //     catagorieId: "34682684628364287"
+            // }, {
+            //     id: uuidv4(),
+            //     title: "Review Code Changes",
+            //     description: "Go through the recent code changes and provide feedback.",
+            //     dueDate: "2023-12-01",
+            //     priority: "High",
+            //     catagorieId: "34682684628364287"
+            // },
+            //  {
+            //      id: uuidv4(),
+            //      title: "Prepare for Meeting",
+            //      description: "Gather necessary documents and agenda items for the upcoming meeting.",
+            //      dueDate: "2023-12-02",
+            //      priority: "Medium",
+            //      catagorieId: "837647863486262"
+            //  }, {
+            //      id: uuidv4(),
+            //      title: "Submit Project Report",
+            //      description: "Finalize and submit the monthly project report.",
+            //      dueDate: "2023-12-03",
+            //      priority: "Medium",
+            //      catagorieId: "837647863486262"
+            //  },
         ],
         history: [],
         historyIndex: -1,
@@ -108,42 +75,44 @@ const todoSlice = createSlice({
         addTodo: (state, action) => {
             const {
                 title,
-                description,
-                dueDate,
-                priority,
-                categoryId
+                catagoriId
             } = action.payload;
 
             const newTodo = {
                 id: uuidv4(),
                 title,
-                description,
-                dueDate,
-                priority,
                 status: 'Inprogress',
-                createdAt: Date.now(),
-                catagorieId: categoryId
+                catagoriId // Corrected typo here
             };
 
             // Find the category and add the todo to its todos array
-            const category = state.categories.find(cat => cat.id === categoryId);
-            if (category) {
-                category.todos.push(newTodo);
-            }
+            const category = state.categories.find(cat => cat.id === catagoriId);
+            category.todos.push(newTodo);
+            console.log(category.todos)
 
             state.todos.push(newTodo);
             state.history = [...state.history.slice(0, state.historyIndex + 1), state.todos];
             state.historyIndex += 1;
         },
 
-        deleteTodo: (state, action) => {
-            const {
-                todoId
-            } = action.payload;
-            state.todos = state.todo.filter(todo => todo.id !== todoId);
-             state.history = [...state.history.slice(0, state.historyIndex + 1), state.todo];
-             state.historyIndex += 1;
-        },
+
+       deleteTodo: (state, action) => {
+           const {
+               todoId
+           } = action.payload;
+
+           // Remove the todo from the todos array
+           state.todos = state.todos.filter(todo => todo.id !== todoId);
+
+           // Remove the todo from the corresponding category's todos array
+           state.categories.forEach(category => {
+               category.todos = category.todos.filter(todo => todo.id !== todoId);
+           });
+
+           state.history = [...state.history.slice(0, state.historyIndex + 1), state.todos];
+           state.historyIndex += 1;
+       },
+
 
         clearCompletedTodo: (state) => {
             state.todos = state.todos.filter(todo => todo.status !== 'Completed');

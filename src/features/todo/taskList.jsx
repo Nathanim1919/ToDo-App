@@ -15,9 +15,11 @@ import {
 } from "react-icons/md";
 import TodoForm from './todoForm';
 import { Link, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Aos from 'aos';
 import 'aos/dist/aos.css'
+import { markAsCompleted } from './todoSlice';
+
 
 function TaskList() {
 
@@ -25,6 +27,7 @@ function TaskList() {
   const {
       catagoriId
   } = useParams()
+  const dispatch = useDispatch();
 
   const cat = useSelector(state => {
       const category = state.todos.categories.find(cat => cat.id === catagoriId);
@@ -60,9 +63,13 @@ useEffect(() => {
                 cat && cat.todos.map(task=>(
                     <div>
                         <div>
-                            <div>
+                            <div onClick = {
+                                () => dispatch(markAsCompleted({
+                                    todoId: task.id
+                                }))
+                            } >
                                 {
-                                    task.status === 'Inprogress' ? < FaRegCircle/> : <FaCheckCircle/>
+                                    task.status === "Inprogress" ? <FaRegCircle/> : <FaCheckCircle/>
                                 }
                             </div>
                             <div className='info'>

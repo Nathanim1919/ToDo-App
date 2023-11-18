@@ -5,42 +5,32 @@ import {
 } from "react-icons/md";
 import { addTodo } from './todoSlice';
 import {useSelector, useDispatch} from 'react-redux';
+import{ useParams} from 'react-router-dom'
 
 
 const TodoForm = ({setOpenForm }) => {
   
-  const [newTodo, setNewTodo] = useState({
-    title: '',
-    description: '',
-    dueDate: '',
-    priority: 'Medium', // Set a default priority if needed
-  });
+  const [title, setTitle] = useState('');
 
 
   const dispatch = useDispatch();
   const todos = useSelector(state=> state.todos);
+  const {
+    catagoriId
+  } = useParams()
 
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewTodo({
-      ...newTodo,
-      [name]: value,
-    });
+    setTitle(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addTodo(newTodo));
-    // Reset the form
-    setNewTodo({
-      title: '',
-      description: '',
-      dueDate: '',
-      priority: 'Medium',
-    });
+    dispatch(addTodo({
+      title,
+      catagoriId
+    }));
     setOpenForm(false);
-    console.log(todos)
   };
 
   return (
@@ -54,23 +44,7 @@ const TodoForm = ({setOpenForm }) => {
             </div>
             <Label>
                 Title:
-                <Input type="text" name="title" value={newTodo.title} onChange={handleChange} />
-            </Label>
-            <Label>
-                Description:
-                <Input type="text" name="description" value={newTodo.description} onChange={handleChange} />
-            </Label>
-            <Label>
-                Due Date:
-                <Input type="text" name="dueDate" value={newTodo.dueDate} onChange={handleChange} />
-            </Label>
-            <Label>
-                Priority:
-                <Select name="priority" value={newTodo.priority} onChange={handleChange}>
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-                </Select>
+                <Input type="text" name="title" value={title} onChange={handleChange} />
             </Label>
             <Button type="submit">Add Todo</Button>
         </Form>
