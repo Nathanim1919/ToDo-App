@@ -61,7 +61,9 @@ useEffect(() => {
                     <div>
                         <div>
                             <div>
-                                <FaRegCircle/>
+                                {
+                                    task.status === 'Inprogress' ? < FaRegCircle/> : <FaCheckCircle/>
+                                }
                             </div>
                             <div className='info'>
                                 <p>{task.title}</p>

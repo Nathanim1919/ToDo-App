@@ -13,10 +13,13 @@ import {
     MdKeyboardBackspace
 } from "react-icons/md";
 import {useSelector} from 'react-redux'
+import { markAsCompleted } from '../features/todo/todoSlice';
+import { useDispatch } from 'react-redux';
 
 function TodaysTask() {
 
     const todos = useSelector(state=>state.todos.todos);
+    const dispatch = useDispatch();
 
    return (
     <TaskList >
@@ -26,8 +29,14 @@ function TodaysTask() {
              todos && todos.map(todo=>(
                         <div className='task'>
                             <div>
-                                <div>
-                                    <FaRegCircle/>
+                                <div onClick = {
+                                        () => dispatch(markAsCompleted({
+                                            todoId: todo.id
+                                        }))
+}>
+                                    {
+                                        todo.status === "Inprogress" ? <FaRegCircle/> : <FaCheckCircle/>
+                                    }
                                 </div>
                                 <div className='title'>
                                     <p>{todo.title}</p>

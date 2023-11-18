@@ -10,7 +10,7 @@ import 'aos/dist/aos.css'
 function TodoCatagorise() {
  const [createCatagorie, setCreateCatagorie] = useState(false);
   const categories = useSelector((state) => state.todos.categories);
-  
+
 useEffect(() => {
     // This block will run whenever categories are updated
     console.log('Updated categories:', categories);
@@ -35,7 +35,7 @@ useEffect(() => {
               `catagorie/${cat.id}`
           } data-aos="zoom-in">
               <div>
-                <span>12 Tasks</span>
+                <span>{cat.todos.length} todos</span>
                 <h2>{(cat.title).slice(0, 10)}..</h2>
                 <div className='progresss'>
                     <div className='inner-pro'></div>
@@ -114,7 +114,12 @@ const CatagoriesSection = styled.div`
             }
 
             span{
-                font-size: .9rem;
+                font-size: .8rem;
+                font-weight: 800;
+                padding:.2rem .5rem;
+                border-radius: 20px;
+                color:#333;
+                background-color: rgba(0,255,200,.9);
             }
 
             .progresss{

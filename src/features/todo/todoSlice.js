@@ -179,6 +179,10 @@ const todoSlice = createSlice({
                 todoToComplete.status = 'Completed';
                 state.completedCount += 1;
             }
+            else{
+                 todoToComplete.status = 'Inprogress';
+                 state.completedCount -= 1;
+            }
         },
 
 
@@ -204,6 +208,7 @@ export const {
     addTodo,
     deleteTodo,
     addCategory,
-    clearCompletedTodo
+    clearCompletedTodo,
+    markAsCompleted
 } = todoSlice.actions;
 export default todoSlice.reducer;
