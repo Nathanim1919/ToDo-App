@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import {
     FaCheckCircle,
@@ -16,34 +16,33 @@ import {useSelector} from 'react-redux'
 
 function TodaysTask() {
 
-        const todos = useSelector(state=>state.todos.todos);
-  return (
+    const todos = useSelector(state=>state.todos.todos);
+
+   return (
     <TaskList >
-        <h1>Todays Task</h1>
+        <h1>All ToDos</h1>
         <div className='todaysTask'>
             {
-                todos.map(todo=>(
-                    <div className='task'>
-                        <div>
+             todos && todos.map(todo=>(
+                        <div className='task'>
                             <div>
-                                <FaRegCircle/>
+                                <div>
+                                    <FaRegCircle/>
+                                </div>
+                                <div className='title'>
+                                    <p>{todo.title}</p>
+                                </div>
                             </div>
-                            <div className='title'>
-                                <p>{todo.title}</p>
-                                <span>Personal</span>
+
+                            <div className='manipulationIcons'>
+                                <div>
+                                    <MdDelete/>
+                                </div>
+                                <div>
+                                    <FiEdit/>
+                                </div>
                             </div>
                         </div>
-
-                        <div className='manipulationIcons'>
-                            <div>
-                                <MdDelete/>
-                            </div>
-                            <div>
-                                <FiEdit/>
-                            </div>
-                        </div>
-                    </div>
-
                 ))
             }
         </div>

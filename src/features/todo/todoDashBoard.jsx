@@ -13,7 +13,7 @@ function TodoDashBoard() {
   }, [])
 
   return (
-    <DashBoard >
+    <DashBoard>
       <div className='header' data-aos="fade-up">
         <h1>Welcome Back!</h1>
         <p>The only way to do great work is to love what you do.</p>

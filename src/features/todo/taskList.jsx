@@ -56,79 +56,27 @@ useEffect(() => {
             </div>
           </div>
         <div className='taskList'>
-            <div>
-                <div>
+            {
+                cat && cat.todos.map(task=>(
                     <div>
-                        <FaRegCircle/>
-                    </div>
-                    <div>Task List</div>
-                </div>
-                <div className="icons">
-                    <div><MdDelete/></div>
-                    <div>
-                        <FiEdit/>
-                    </div>
-                </div>
-            </div>
-             <div>
-                <div>
-                    <div>
-                        <FaRegCircle/>
-                    </div>
-                    <div>Task List</div>
-                </div>
-                <div className="icons">
-                    <div><MdDelete/></div>
-                    <div>
-                        <FiEdit/>
-                    </div>
-                </div>
-            </div>
+                        <div>
+                            <div>
+                                <FaRegCircle/>
+                            </div>
+                            <div className='info'>
+                                <p>{task.title}</p>
+                            </div>
 
-             <div>
-                <div>
-                    <div>
-                        <FaRegCircle/>
+                        </div>
+                        <div className="icons">
+                            <div><MdDelete/></div>
+                            <div>
+                                <FiEdit/>
+                            </div>
+                        </div>
                     </div>
-                    <div>Task List</div>
-                </div>
-                <div className="icons">
-                    <div><MdDelete/></div>
-                    <div>
-                        <FiEdit/>
-                    </div>
-                </div>
-            </div>
-
-             <div>
-                <div>
-                    <div>
-                        <FaRegCircle/>
-                    </div>
-                    <div>Task List</div>
-                </div>
-                <div className="icons">
-                    <div><MdDelete/></div>
-                    <div>
-                        <FiEdit/>
-                    </div>
-                </div>
-            </div>
-
-             <div>
-                <div>
-                    <div>
-                        <FaRegCircle/>
-                    </div>
-                    <div>Task List</div>
-                </div>
-                <div className="icons">
-                    <div><MdDelete/></div>
-                    <div>
-                        <FiEdit/>
-                    </div>
-                </div>
-            </div>
+                ))
+            }
            </div>
     </TaskLists>
   )
@@ -193,12 +141,13 @@ const TaskLists = styled.div`
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding:.5rem 1rem;
+            padding:.0rem 1rem;
             box-shadow: 0 3px 12px rgba(0,0,0,.1);
             border-radius: 5px;
             cursor: pointer;
             border:1px solid transparent;
             transition: all .3s ease-in-out;
+
 
             &:hover{
                  border:1px solid #333;

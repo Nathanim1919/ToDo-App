@@ -10,7 +10,7 @@ import 'aos/dist/aos.css'
 function TodoCatagorise() {
  const [createCatagorie, setCreateCatagorie] = useState(false);
   const categories = useSelector((state) => state.todos.categories);
-22
+  
 useEffect(() => {
     // This block will run whenever categories are updated
     console.log('Updated categories:', categories);

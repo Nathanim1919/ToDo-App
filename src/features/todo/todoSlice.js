@@ -9,7 +9,7 @@ const todoSlice = createSlice({
     name: "todos",
     initialState: {
        categories: [{
-               id: uuidv4(),
+               id: '34682684628364287',
                title: "Personal",
                todos: [{
                        id: uuidv4(),
@@ -30,7 +30,7 @@ const todoSlice = createSlice({
                ],
            },
            {
-               id: uuidv4(),
+               id: '837647863486262',
                title: "Work",
                todos: [
                 {
@@ -39,7 +39,7 @@ const todoSlice = createSlice({
                        description: "Gather necessary documents and agenda items for the upcoming meeting.",
                        dueDate: "2023-12-02",
                        priority: "Medium",
-                      catagorieId:"837647863486262"
+                       catagorieId:"837647863486262"
                    },
                    {
                        id: uuidv4(),
@@ -47,7 +47,7 @@ const todoSlice = createSlice({
                        description: "Finalize and submit the monthly project report.",
                        dueDate: "2023-12-03",
                        priority: "Medium",
-                      catagorieId:"837647863486262"
+                       catagorieId:"837647863486262"
                    },
                ],
            },
