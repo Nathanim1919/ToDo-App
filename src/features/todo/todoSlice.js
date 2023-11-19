@@ -28,6 +28,7 @@ const todoSlice = createSlice({
             state.categories.push(newCategory);
             console.log(state.categories)
         },
+    
 
         addTodo: (state, action) => {
             const {
@@ -87,6 +88,6 @@ export const {
     addTodo,
     deleteTodo,
     addCategory,
-    markAsCompleted
+    markAsCompleted,
 } = todoSlice.actions;
 export default todoSlice.reducer;

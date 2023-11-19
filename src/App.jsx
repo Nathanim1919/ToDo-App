@@ -6,13 +6,10 @@ import TaskList from './features/todo/taskList.jsx';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
-    const [isNightMode, setNightMode] = useState(false);
-
+   
   return (
-    <div div className = {
-      isNightMode?"nightMode":""
-    } >
-      <Header isNightMode={isNightMode} setNightMode={setNightMode}/>
+    <div>
+      <Header/>
       <Routes>
         <Route path='/ToDo-App' element={<TodoDashBoard/>}/>
         <Route path='ToDo-App/catagorie/:catagoriId' element={<TaskList/>}/>
