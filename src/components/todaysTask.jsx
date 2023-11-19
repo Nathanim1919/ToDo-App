@@ -13,22 +13,57 @@ import {
     MdKeyboardBackspace
 } from "react-icons/md";
 import {useSelector} from 'react-redux'
-import { markAsCompleted, deleteTodo } from '../features/todo/todoSlice';
+import { markAsCompleted, deleteTodo, clearCompletedTodo } from '../features/todo/todoSlice';
 import { useDispatch } from 'react-redux';
 
 function TodaysTask() {
 
-    const todos = useSelector(state=>state.todos.todos);
+const [activeTasks, setActiveTasks] = useState(false);   
+const [completedTasks, setCompletedTasks] = useState(false);    
+const [allTasks, setAllTasks] = useState(false);    
+
+const todos = useSelector(state => state.todos.todos);
+const completedTodos = useSelector(state => state.todos.todos.filter(todo => todo.status === 'Completed'));
+const inprogressTodos = useSelector(state => state.todos.todos.filter(todo => todo.status === 'Inprogress'));
+
     const dispatch = useDispatch();
 
    return (
     <TaskList >
-        <h1>All ToDos</h1>
+        <div className='filter'>
+        <p>{inprogressTodos.length} items left</p>
+        <div>
+            <p onClick={
+                ()=>{
+                    setAllTasks(true);
+                    setActiveTasks(false);
+                    setCompletedTasks(false);
+                }
+            }>All</p>
+            <p onClick = {
+                () => {
+                    setActiveTasks(true); 
+                    setCompletedTasks(false);
+                     setAllTasks(false);
+                }
+            } > Active </p>
+            <p onClick = {
+                () => {
+                    setCompletedTasks(true);
+                    setActiveTasks(false);
+                     setAllTasks(false);
+                }
+            } > Completed </p>
+        </div>
+        <div onClick={()=>dispatch(clearCompletedTodo())}>
+            <p>Clear Completed</p>
+        </div>
+        </div>
         <div className='todaysTask'>
             {
-             todos && todos.map(todo=>(
+             todos && (activeTasks ? inprogressTodos : completedTasks ? completedTodos:todos).map(todo => (
                         <div className='task'>
-                            <div>
+                            <div className={todo.status === "Completed"?"taskDone":""}>
                                 <div onClick = {
                                         () => dispatch(markAsCompleted({
                                             todoId: todo.id
@@ -69,8 +104,29 @@ const TaskList  = styled.div`
     display: grid;
     padding: 1rem;
 
-    >h1{
-        font-size:1.2rem;
+    .filter{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        >div{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap:1rem;
+
+            >*{
+                background-color: blue;
+                padding: 0.1rem .5rem;
+                border-radius: 20px;
+                color:#fff;
+                cursor: pointer;
+                font-size: .9rem;
+                &:hover{
+                    opacity: .5;
+                }
+            }
+        }
     }
 
     .todaysTask{
@@ -99,6 +155,10 @@ const TaskList  = styled.div`
             justify-content: space-between;
             align-items: center;
             gap: 1rem;
+        }
+
+        > div.taskDone .title{
+            text-decoration: line-through;
         }
 
         >div:nth-child(1) .title{

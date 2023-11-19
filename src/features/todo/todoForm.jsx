@@ -60,9 +60,9 @@ export default TodoForm;
         position: absolute;
         top:0;
         left: 0;
-        width: 100%;
+        width: 100vw;
         height: 100%;
-        background-color: rgba(0,0,0,.5);
+        /* background-color: rgba(0,0,0,.5); */
         display: grid;
         place-items: center;
     `
@@ -75,6 +75,7 @@ export default TodoForm;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       background-color: #fff;
       position: relative;
+      margin-top: 4rem;
 
       .close{
         position: absolute;
