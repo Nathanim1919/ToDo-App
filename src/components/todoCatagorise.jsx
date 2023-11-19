@@ -11,6 +11,10 @@ function TodoCatagorise() {
  const [createCatagorie, setCreateCatagorie] = useState(false);
   const categories = useSelector((state) => state.todos.categories);
 
+  categories.forEach(element => {
+    console.log("cataogries todo", element.todos)
+  });
+
 useEffect(() => {
     // This block will run whenever categories are updated
     console.log('Updated categories:', categories);
@@ -21,6 +25,7 @@ useEffect(() => {
           duration: 2000
       })
   }, [])
+
 
   return (
     <CatagoriesSection>
@@ -37,9 +42,6 @@ useEffect(() => {
               <div>
                 <span>{cat.todos.length} todos</span>
                 <h2>{(cat.title).slice(0, 10)}..</h2>
-                <div className='progresss'>
-                    <div className='inner-pro'></div>
-                </div>
             </div>
           </Link> 
          
@@ -129,7 +131,6 @@ const CatagoriesSection = styled.div`
                 margin-top: .5rem;
 
                 >*{
-                    width: 70%;
                     height: 100%;
                     background-color: blue;
                 }

@@ -13,7 +13,7 @@ import {
     MdKeyboardBackspace
 } from "react-icons/md";
 import {useSelector} from 'react-redux'
-import { markAsCompleted, deleteTodo, clearCompletedTodo } from '../features/todo/todoSlice';
+import { markAsCompleted, deleteTodo } from '../features/todo/todoSlice';
 import { useDispatch } from 'react-redux';
 
 function TodaysTask() {
@@ -39,24 +39,25 @@ const inprogressTodos = useSelector(state => state.todos.todos.filter(todo => to
                     setActiveTasks(false);
                     setCompletedTasks(false);
                 }
-            }>All</p>
+            }>All({todos.length})</p>
             <p onClick = {
                 () => {
                     setActiveTasks(true); 
                     setCompletedTasks(false);
                      setAllTasks(false);
                 }
-            } > Active </p>
+            } > Active({
+                inprogressTodos.length
+            }) </p>
             <p onClick = {
                 () => {
                     setCompletedTasks(true);
                     setActiveTasks(false);
                      setAllTasks(false);
                 }
-            } > Completed </p>
-        </div>
-        <div onClick={()=>dispatch(clearCompletedTodo())}>
-            <p>Clear Completed</p>
+            } > Completed({
+                completedTodos.length
+            }) </p>
         </div>
         </div>
         <div className='todaysTask'>

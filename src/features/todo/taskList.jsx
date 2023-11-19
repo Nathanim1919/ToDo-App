@@ -62,7 +62,7 @@ function TaskList() {
         <div className='taskList'>
            {
     todos && todos.map(task => (
-        <div key={task.id}> {/* Add a unique key for each item in the map */}
+        <div key={task.id}>
             <div>
                 <div onClick={() => dispatch(markAsCompleted({ todoId: task.id }))}>
                     {task.status === "Inprogress" ? <FaRegCircle /> : <FaCheckCircle />}

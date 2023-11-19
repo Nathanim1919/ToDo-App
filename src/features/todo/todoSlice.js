@@ -8,25 +8,11 @@ import {
 const todoSlice = createSlice({
     name: "todos",
     initialState: {
-       categories: [{
-               id: '34682684628364287',
-               title: "Personal",
-               todos: [
-               ],
-           },
-           {
-               id: '837647863486262',
-               title: "Work",
-               todos: [],
-           },
+       categories: [
        ],
 
         todos: [
         ],
-        history: [],
-        historyIndex: -1,
-        sortPreference: 'dueDate', // Default sort preference
-        completedCount: 0,
     },
 
     reducers: {
@@ -62,8 +48,6 @@ const todoSlice = createSlice({
             console.log(category.todos)
 
             state.todos.push(newTodo);
-            state.history = [...state.history.slice(0, state.historyIndex + 1), state.todos];
-            state.historyIndex += 1;
         },
 
 
@@ -79,29 +63,23 @@ const todoSlice = createSlice({
            state.categories.forEach(category => {
                category.todos = category.todos.filter(todo => todo.id !== todoId);
            });
-
-           state.history = [...state.history.slice(0, state.historyIndex + 1), state.todos];
-           state.historyIndex += 1;
        },
 
-        clearCompletedTodo: (state) => {
-            state.todos = state.todos.filter(todo => todo.status !== 'Completed');
-        },
 
-        markAsCompleted: (state, action) => {
-            const {
-                todoId
-            } = action.payload;
-            const todoToComplete = state.todos.find((todo) => todo.id === todoId);
-            if (todoToComplete && todoToComplete.status !== 'Completed') {
-                todoToComplete.status = 'Completed';
-                state.completedCount += 1;
-            }
-            else{
-                 todoToComplete.status = 'Inprogress';
-                 state.completedCount -= 1;
-            }
-        },
+       markAsCompleted: (state, action) => {
+           const {
+               todoId
+           } = action.payload;
+
+           // Find the todo in the state.todos array
+           const todoToComplete = state.todos.find((todo) => todo.id === todoId);
+
+               if (todoToComplete.status !== 'Completed') {
+                   todoToComplete.status = 'Completed';
+               } else {
+                   todoToComplete.status = 'Inprogress';
+               }
+           }
     },
 });
 
@@ -109,7 +87,6 @@ export const {
     addTodo,
     deleteTodo,
     addCategory,
-    clearCompletedTodo,
     markAsCompleted
 } = todoSlice.actions;
 export default todoSlice.reducer;
