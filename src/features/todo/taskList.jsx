@@ -46,7 +46,10 @@ function TaskList() {
     <TaskLists data-aos="fade-up">
         {openForm && <TodoForm setOpenForm={setOpenForm}/>}
         <div className = 'header' >
-            <Link to={'/'} className='backIcon'>
+            <Link  to = {
+                '/ToDo-App'
+            }
+            className = 'backIcon' >
                 <MdKeyboardBackspace/>
             </Link>
 
