@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import {
     FaCheckCircle,
@@ -15,8 +15,16 @@ import {
 import {useSelector} from 'react-redux'
 import { markAsCompleted, deleteTodo } from '../features/todo/todoSlice';
 import { useDispatch } from 'react-redux';
+import Aos from 'aos';
+import 'aos/dist/aos.css'
 
 function TodaysTask() {
+
+    useEffect(() => {
+        Aos.init({
+            duration: 1000
+        })
+    }, []);
 
 const [activeTasks, setActiveTasks] = useState(false);   
 const [completedTasks, setCompletedTasks] = useState(false);    
@@ -26,21 +34,22 @@ const todos = useSelector(state => state.todos.todos);
 const completedTodos = useSelector(state => state.todos.todos.filter(todo => todo.status === 'Completed'));
 const inprogressTodos = useSelector(state => state.todos.todos.filter(todo => todo.status === 'Inprogress'));
 
-    const dispatch = useDispatch();
+
+   const dispatch = useDispatch();
 
    return (
     <TaskList >
         <div className='filter'>
         <p>{inprogressTodos.length} items left</p>
         <div>
-            <p onClick={
+            <p data-aos="zoom-in" onClick={
                 ()=>{
                     setAllTasks(true);
                     setActiveTasks(false);
                     setCompletedTasks(false);
                 }
             }>All({todos.length})</p>
-            <p onClick = {
+            <p data-aos="zoom-in" onClick = {
                 () => {
                     setActiveTasks(true); 
                     setCompletedTasks(false);
@@ -49,7 +58,7 @@ const inprogressTodos = useSelector(state => state.todos.todos.filter(todo => to
             } > Active({
                 inprogressTodos.length
             }) </p>
-            <p onClick = {
+            <p data-aos="zoom-in" onClick = {
                 () => {
                     setCompletedTasks(true);
                     setActiveTasks(false);
@@ -63,7 +72,7 @@ const inprogressTodos = useSelector(state => state.todos.todos.filter(todo => to
         <div className='todaysTask'>
             {
              todos && (activeTasks ? inprogressTodos : completedTasks ? completedTodos:todos).map(todo => (
-                        <div className='task'>
+                        <div data-aos="fade-up" className='task'>
                             <div className={todo.status === "Completed"?"taskDone":""}>
                                 <div onClick = {
                                         () => dispatch(markAsCompleted({

@@ -18,7 +18,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Aos from 'aos';
 import 'aos/dist/aos.css'
-import { deleteTodo, markAsCompleted } from './todoSlice';
+import { deleteTodo } from './todoSlice';
 
 
 function TaskList() {
@@ -40,10 +40,10 @@ function TaskList() {
     Aos.init({
         duration: 1000
     })
-  }, [])
+  }, []);
 
   return (
-    <TaskLists data-aos="fade-up">
+    <TaskLists>
         {openForm && <TodoForm setOpenForm={setOpenForm}/>}
         <div className = 'header' >
             <Link  to = {
@@ -64,12 +64,12 @@ function TaskList() {
           </div>
         <div className='taskList'>
            {
-    todos && todos.map(task => (
-        <div key={task.id}>
+            todos && todos.map(task => (
+        <div key = {
+            task.id
+        }
+        data-aos = "fade-up" >
             <div>
-                <div onClick={() => dispatch(markAsCompleted({ todoId: task.id }))}>
-                    {task.status === "Inprogress" ? <FaRegCircle /> : <FaCheckCircle />}
-                </div>
                 <div className='info'>
                     <p className={task.status === 'Completed'?"taskDone":""}>{task.title}</p>
                 </div>
