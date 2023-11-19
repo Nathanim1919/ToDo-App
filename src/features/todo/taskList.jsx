@@ -18,7 +18,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Aos from 'aos';
 import 'aos/dist/aos.css'
-import { markAsCompleted } from './todoSlice';
+import { deleteTodo, markAsCompleted } from './todoSlice';
 
 
 function TaskList() {
@@ -31,15 +31,16 @@ function TaskList() {
 
   const cat = useSelector(state => {
       const category = state.todos.categories.find(cat => cat.id === catagoriId);
-      console.log(category)
       return category;
   });
 
-useEffect(() => {
+  const todos = cat.todos;
+
+  useEffect(() => {
     Aos.init({
         duration: 1000
     })
-}, [])
+  }, [])
 
   return (
     <TaskLists data-aos="fade-up">
@@ -59,33 +60,26 @@ useEffect(() => {
             </div>
           </div>
         <div className='taskList'>
-            {
-                cat && cat.todos.map(task=>(
-                    <div>
-                        <div>
-                            <div onClick = {
-                                () => dispatch(markAsCompleted({
-                                    todoId: task.id
-                                }))
-                            } >
-                                {
-                                    task.status === "Inprogress" ? <FaRegCircle/> : <FaCheckCircle/>
-                                }
-                            </div>
-                            <div className='info'>
-                                <p>{task.title}</p>
-                            </div>
+           {
+    todos && todos.map(task => (
+        <div key={task.id}> {/* Add a unique key for each item in the map */}
+            <div>
+                <div onClick={() => dispatch(markAsCompleted({ todoId: task.id }))}>
+                    {task.status === "Inprogress" ? <FaRegCircle /> : <FaCheckCircle />}
+                </div>
+                <div className='info'>
+                    <p className={task.status === 'Completed'?"taskDone":""}>{task.title}</p>
+                </div>
+            </div>
+            <div className="icons">
+                <div onClick={() => dispatch(deleteTodo({ todoId: task.id }))}>
+                    <MdDelete />
+                </div>
+            </div>
+        </div>
+    ))
+}
 
-                        </div>
-                        <div className="icons">
-                            <div><MdDelete/></div>
-                            <div>
-                                <FiEdit/>
-                            </div>
-                        </div>
-                    </div>
-                ))
-            }
            </div>
     </TaskLists>
   )
@@ -156,6 +150,11 @@ const TaskLists = styled.div`
             cursor: pointer;
             border:1px solid transparent;
             transition: all .3s ease-in-out;
+
+
+           .info .taskdone{
+                text-decoration: line-through;
+            }
 
 
             &:hover{

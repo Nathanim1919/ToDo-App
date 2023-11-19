@@ -22,16 +22,8 @@ function Header({isNightMode, setNightMode}) {
         <div>
             <RiMenu4Line />
         </div>
-        <div className='icons'>
-            <div>
-            <CiSearch />
-            </div>
-            <div>
-            <IoIosNotificationsOutline />
-            </div>
-            <div onClick={()=>setNightMode(!isNightMode)}>
-                {isNightMode?<MdModeNight/>:<IoMdSunny/>}
-            </div>
+        <div>
+            <span>Just Do!</span>
         </div>
     </HeaderSection>
   )

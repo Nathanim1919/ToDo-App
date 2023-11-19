@@ -12,35 +12,6 @@ const todoSlice = createSlice({
                id: '34682684628364287',
                title: "Personal",
                todos: [
-                 {
-                     id: uuidv4(),
-                     title: "Complete Project Proposal",
-                     description: "Research and compile information for the project proposal.",
-                     dueDate: "2023-12-01",
-                     priority: "High",
-                     catagorieId: "34682684628364287"
-                 }, {
-                     id: uuidv4(),
-                     title: "Review Code Changes",
-                     description: "Go through the recent code changes and provide feedback.",
-                     dueDate: "2023-12-01",
-                     priority: "High",
-                     catagorieId: "34682684628364287"
-                 }, {
-                     id: uuidv4(),
-                     title: "Prepare for Meeting",
-                     description: "Gather necessary documents and agenda items for the upcoming meeting.",
-                     dueDate: "2023-12-02",
-                     priority: "Medium",
-                     catagorieId: "837647863486262"
-                 }, {
-                     id: uuidv4(),
-                     title: "Submit Project Report",
-                     description: "Finalize and submit the monthly project report.",
-                     dueDate: "2023-12-03",
-                     priority: "Medium",
-                     catagorieId: "837647863486262"
-                 },
                ],
            },
            {
@@ -51,36 +22,6 @@ const todoSlice = createSlice({
        ],
 
         todos: [
-            {
-                id: uuidv4(),
-                title: "Complete Project Proposal",
-                description: "Research and compile information for the project proposal.",
-                dueDate: "2023-12-01",
-                priority: "High",
-                catagorieId: "34682684628364287"
-            }, {
-                id: uuidv4(),
-                title: "Review Code Changes",
-                description: "Go through the recent code changes and provide feedback.",
-                dueDate: "2023-12-01",
-                priority: "High",
-                catagorieId: "34682684628364287"
-            },
-             {
-                 id: uuidv4(),
-                 title: "Prepare for Meeting",
-                 description: "Gather necessary documents and agenda items for the upcoming meeting.",
-                 dueDate: "2023-12-02",
-                 priority: "Medium",
-                 catagorieId: "837647863486262"
-             }, {
-                 id: uuidv4(),
-                 title: "Submit Project Report",
-                 description: "Finalize and submit the monthly project report.",
-                 dueDate: "2023-12-03",
-                 priority: "Medium",
-                 catagorieId: "837647863486262"
-             },
         ],
         history: [],
         historyIndex: -1,

@@ -86,9 +86,6 @@ const inprogressTodos = useSelector(state => state.todos.todos.filter(todo => to
                                 } >
                                     <MdDelete/>
                                 </div>
-                                <div>
-                                    <FiEdit/>
-                                </div>
                             </div>
                         </div>
                 ))
@@ -108,6 +105,7 @@ const TaskList  = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
 
         >div{
             display: flex;
